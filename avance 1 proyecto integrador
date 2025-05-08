@@ -1,0 +1,49 @@
+import javax.swing.*;
+public class MesaLuzz {
+    
+    public static void main(String[] args) {
+       
+     boolean estado[] = {false, false, false, false, false, false,false}; // 7 mesas
+     String Mesa[] = {"Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5", "Mesa 6", "Mesa 7"};
+    
+    JOptionPane.showMessageDialog(null, "El estado inicial de las mesas es apagada");
+
+    // repeticion
+     while (true) {
+        StringBuilder estadoMesas = new StringBuilder("Estado actual de las mesas:\n");
+        for (int i = 0; i < estado.length; i++) {
+            estadoMesas.append(Mesa[i]).append(" = ").append(estado[i] ? "Encendida" : "Apagada").append("\n");
+        }
+
+        JOptionPane.showMessageDialog(null, estadoMesas.toString());
+
+        String[] opciones = {"Encender luz de una mesa", "Apagar luz de una mesa", "Salir"};
+        int opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción:", "Opciones",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+
+        if (opcion == 2 || opcion == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(null, "Hasta luego");
+            break;
+        }
+
+        int mesa = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de mesa (1-7):")) - 1;
+
+        if (mesa >= 0 && mesa < estado.length) {
+            if (opcion == 0) {
+                estado[mesa] = true;
+                JOptionPane.showMessageDialog(null, "La luz de la " + Mesa[mesa] + " ha sido encendida.");
+            } else if (opcion == 1) {
+                estado[mesa] = false;
+                JOptionPane.showMessageDialog(null, "La luz de la " + Mesa[mesa] + " ha sido apagada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Opción no válida.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Esa mesa no existe, porfa elige otra mesa.");
+        }
+
+     }
+
+    }    
+
+}
